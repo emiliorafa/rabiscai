@@ -1,0 +1,13 @@
+# Blueprint do Render: um único Web Service Node que serve o cliente (PWA) e o Socket.IO.
+services:
+  - type: web
+    name: rabiscai
+    runtime: node
+    plan: free
+    buildCommand: npm ci --include=dev && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: "22"

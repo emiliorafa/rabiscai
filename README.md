@@ -24,6 +24,15 @@ npm run build && npm start     # abra http://localhost:3001
 Variáveis opcionais do servidor: `PORT` (3001), `ROUND_SECONDS` (90), `INTERMISSION_SECONDS` (7), `GRACE_SECONDS` (20, tempo de reconexão).
 Dica: `ROUND_SECONDS=15 npm run dev` acelera os testes manuais.
 
+## Publicação (PWA no Render)
+
+O cliente é um PWA (manifest + service worker via `vite-plugin-pwa`): dá para "instalar" pelo navegador no celular ou no computador.
+O service worker guarda só a casca do app e as fontes; o jogo em si precisa do servidor.
+
+O deploy é um único **Web Service** Node no Render, descrito em `render.yaml`:
+build `npm ci --include=dev && npm run build`, start `npm start`, health check `/api/health`.
+No Render: **New → Blueprint**, escolha este repositório e confirme. Cada push na `main` gera um novo deploy.
+
 ## Testes
 
 ```bash
